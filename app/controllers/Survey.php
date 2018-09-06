@@ -33,11 +33,11 @@ class Survey extends CI_Controller {
 
 		/*if (!$this->input->is_ajax_request()) {
 		   exit('No direct script access allowed');
-		}*/		
+		}*/
 
 		if($this->data['name'] != '' && $this->data['email'] != '' && $this->data['phone'])
 		{
-		
+
 			$this->db->trans_begin();
 
 			$this->Pros_model->Insert($this->data);
@@ -79,9 +79,12 @@ class Survey extends CI_Controller {
 				<strong>Nivel de inversión:</strong> '.$this->data['investment_level'].'<br>
 				<strong>Día:</strong> '.$this->data['date'];
 
+		$cc_ = array('pedro@ideasreward.com', 'alejandro@ideasreward.com', 'jcruz@ideasreward.com');
+
 		$this->email->initialize($config);
 		$this->email->from('ideas.reward@gmail.com', 'Ideas Reward');
 		$this->email->to('miguel@ideasreward.com');
+		$this->email->cc($cc_);
 		$this->email->subject('Nuevo prospecto');
 		$this->email->message($html);
 		$this->email->send();
